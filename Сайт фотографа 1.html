@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Анна Светлова | Профессиональный фотограф</title>
+  <!-- Подключение шрифта Inter для современного минималистичного вида -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (бесплатные иконки) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #C6D8E3; /* Ледяной голубой — фон сайта */
+      color: #0A2463; /* Темно-синий для текста */
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* Контейнер для ограничения ширины */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ========== ШАПКА / НАВИГАЦИЯ ========== */
+    .navbar {
+      background-color: #FFFFFF;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(10, 36, 99, 0.05);
+      padding: 16px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0A2463;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #3E6680; /* Серо-синий */
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #0A2463;
+    }
+
+    .btn-book {
+      background-color: #0A2463;
+      color: #FFFFFF !important;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .btn-book:hover {
+      background-color: #1a3a7a;
+      color: white;
+    }
+
+    /* Мобильное меню (бургер) */
+    .menu-toggle {
+      display: none;
+      font-size: 1.6rem;
+      color: #0A2463;
+      cursor: pointer;
+    }
+
+    /* ========== HERO СЕКЦИЯ ========== */
+    .hero {
+      background-color: #C6D8E3;
+      padding: 60px 0;
+    }
+
+    .hero-grid {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: #0A2463;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #3E6680;
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: #0A2463;
+      color: white;
+      padding: 14px 36px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background-color: #0e2c72;
+      transform: translateY(-2px);
+    }
+
+    .hero-image {
+      flex: 1;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    /* ========== СЕКЦИЯ ПОРТФОЛИО ========== */
+    .section {
+      padding: 80px 0;
+      background-color: #FFFFFF;
+      margin-bottom: 0;
+    }
+
+    .section-alt {
+      background-color: #F8FAFC; /* чуть светлее для чередования, но сохраняем стиль */
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #0A2463;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    /* фильтры портфолио */
+    .portfolio-filters {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: none;
+      border: 1px solid #3E6680;
+      padding: 8px 24px;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #3E6680;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background-color: #0A2463;
+      color: white;
+      border-color: #0A2463;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .portfolio-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      background-color: #C6D8E3;
+      cursor: pointer;
+    }
+
+    .portfolio-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .portfolio-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(10, 36, 99, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .portfolio-card:hover .overlay {
+      opacity: 1;
+    }
+
+    .overlay span {
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    /* ========== БИОГРАФИЯ ========== */
+    .about-content {
+      display: flex;
+      gap: 48px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #0A2463;
+    }
+
+    .about-text p {
+      margin-bottom: 18px;
+      color: #1f2e3e;
+    }
+
+    .about-img {
+      flex: 1;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+
+    /* ========== УСЛУГИ И ЦЕНЫ ========== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 24px;
+      padding: 32px 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      border: 1px solid #E2E8F0;
+      transition: all 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: #C6D8E3;
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      color: #0A2463;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0A2463;
+      margin: 16px 0;
+    }
+
+    .service-card p {
+      color: #3E6680;
+    }
+
+    /* ========== ОТЗЫВЫ ========== */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .testimonial-card {
+      background-color: #FFFFFF;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+      border: 1px solid #E2EDF2;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 20px;
+      color: #1e2f3a;
+    }
+
+    .client-name {
+      font-weight: 700;
+      color: #0A2463;
+    }
+
+    /* ========== БЛОГ (превью статей) ========== */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .blog-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: 0.2s;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+    }
+    .blog-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .blog-card:hover img {
+      transform: scale(1.02);
+    }
+    .blog-card h4 {
+      font-size: 1.3rem;
+      margin: 20px 20px 10px;
+    }
+    .blog-card p {
+      margin: 0 20px 20px;
+      color: #3E6680;
+    }
+    /* ========== КОНТАКТЫ И ФОРМА ========== */
+    .contact-grid {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .contact-info {
+      flex: 1;
+    }
+    .contact-info i {
+      margin-right: 12px;
+      color: #0A2463;
+      width: 28px;
+    }
+    .contact-info p {
+      margin: 18px 0;
+      font-size: 1.05rem;
+    }
+    .contact-form {
+      flex: 1;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 16px;
+      border: 1px solid #BCCCD9;
+      font-family: inherit;
+      background: white;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button[type="submit"] {
+      background-color: #0A2463;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* футер */
+    .footer {
+      background-color: #0A2463;
+      padding: 48px 0 32px;
+      color: #C6D8E3;
+    }
+    .footer .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .footer a {
+      color: #C6D8E3;
+      text-decoration: none;
+      margin-right: 20px;
+      font-size: 1.3rem;
+    }
+    .footer a:hover {
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .container {
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- НАВИГАЦИЯ -->
+<nav class="navbar">
+  <div class="container nav-container">
+    <a href="#" class="logo">A.Svetlova</a>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#portfolio">Портфолио</a></li>
+      <li><a href="#about">Биография</a></li>
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#blog">Блог</a></li>
+      <li><a href="#contact">Контакты</a></li>
+      <li><a href="#contact" class="btn-book">Записаться</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO СЕКЦИЯ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <h1>Анна Светлова<br>Capturing Your Story</h1>
+      <p>Семейная, свадебная и портретная фотография. Я помогаю сохранить самые тёплые моменты жизни в кадре.</p>
+      <a href="#portfolio" class="btn-primary">Explore My Portfolio</a>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Фотограф за работой">
+    </div>
+  </div>
+</section>
+
+<!-- ПОРТФОЛИО С ФИЛЬТРАЦИЕЙ (9 ярких фотографий) -->
+<section id="portfolio" class="section">
+  <div class="container">
+    <h2 class="section-title">Мои работы</h2>
+    <div class="portfolio-filters">
+      <button class="filter-btn active" data-filter="all">Все</button>
+      <button class="filter-btn" data-filter="portrait">Портрет</button>
+      <button class="filter-btn" data-filter="wedding">Свадьба</button>
+      <button class="filter-btn" data-filter="family">Семья</button>
+    </div>
+    <div class="portfolio-grid" id="portfolio-grid">
+      <!-- Портреты -->
+      <div class="portfolio-card" data-category="portrait"><img src="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Портрет девушки"><div class="overlay"><span>ПОРТРЕТ</span></div></div>
+      <div class="portfolio-card" data-category="portrait"><img src="https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Портрет мужчины"><div class="overlay"><span>ПОРТРЕТ</span></div></div>
+      <div class="portfolio-card" data-category="portrait"><img src="https://images.pexels.com/photos/2537263/pexels-photo-2537263.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Креативный портрет"><div class="overlay"><span>ПОРТРЕТ</span></div></div>
+      <!-- Свадьбы -->
+      <div class="portfolio-card" data-category="wedding"><img src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Свадебная церемония"><div class="overlay"><span>СВАДЬБА</span></div></div>
+      <div class="portfolio-card" data-category="wedding"><img src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Свадебный поцелуй"><div class="overlay"><span>СВАДЬБА</span></div></div>
+      <div class="portfolio-card" data-category="wedding"><img src="https://images.pexels.com/photos/3014857/pexels-photo-3014857.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Свадебное платье"><div class="overlay"><span>СВАДЬБА</span></div></div>
+      <!-- Семейные -->
+      <div class="portfolio-card" data-category="family"><img src="https://images.pexels.com/photos/1577800/pexels-photo-1577800.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Семья с ребенком"><div class="overlay"><span>СЕМЬЯ</span></div></div>
+      <div class="portfolio-card" data-category="family"><img src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Семья на природе"><div class="overlay"><span>СЕМЬЯ</span></div></div>
+      <div class="portfolio-card" data-category="family"><img src="https://images.pexels.com/photos/5905657/pexels-photo-5905657.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Родители и дочь"><div class="overlay"><span>СЕМЬЯ</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- БИОГРАФИЯ -->
+<section id="about" class="section section-alt">
+  <div class="container about-content">
+    <div class="about-text">
+      <h3>Анна Светлова</h3>
+      <p>Фотография стала моим языком ещё в 2012 году. Окончила Академию фотоискусства, сотрудничала с fashion-журналами, но главная любовь — это живые, искренние истории людей. Семейные архивы, свадебные репортажи, портретные сессии — я подхожу к каждому проекту с душой.</p>
+      <p>Лауреат премии «Лучший свадебный фотограф 2023», участник международных выставок. Мои работы — это отражение света и чувств. Давайте создадим что-то волшебное вместе!</p>
+    </div>
+    <div class="about-img">
+      <img src="https://images.pexels.com/photos/3812742/pexels-photo-3812742.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Анна Светлова фотограф" style="width:100%; border-radius: 24px;">
+    </div>
+  </div>
+</section>
+
+<!-- УСЛУГИ И ЦЕНЫ -->
+<section id="services" class="section">
+  <div class="container">
+    <h2 class="section-title">Услуги и стоимость</h2>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon"><i class="fas fa-camera-retro"></i></div><h3>Портретная съёмка</h3><p>Индивидуальная или парная фотосессия в студии / на локации. 2 часа, 70+ фото.</p><div class="price">6 500 ₽</div></div>
+      <div class="service-card"><div class="service-icon"><i class="fas fa-heart"></i></div><h3>Свадебный репортаж</h3><p>Полный день съёмки, подготовка, церемония, прогулка. Готовая история любви.</p><div class="price">25 000 ₽</div></div>
+      <div class="service-card"><div class="service-icon"><i class="fas fa-users"></i></div><h3>Семейная съёмка</h3><p>Выезд на природу, студия или ваш дом. Лёгкая, атмосферная фотосессия.</p><div class="price">8 500 ₽</div></div>
+      <div class="service-card"><div class="service-icon"><i class="fas fa-layer-group"></i></div><h3>Пакет "PREMIUM"</h3><p>Свадьба + Love Story + фотокнига. Всё включено, скидка 15%.</p><div class="price">39 900 ₽</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ОТЗЫВЫ КЛИЕНТОВ -->
+<section id="testimonials" class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">Отзывы</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card"><p class="testimonial-text">"Аня творит чудеса! Снимки такие тёплые, настоящие. Дочка первый раз улыбалась в кадре. Огромное спасибо!"</p><p class="client-name">— Екатерина, семейная съёмка</p></div>
+      <div class="testimonial-card"><p class="testimonial-text">"Свадебные фото — просто мечта. Гости до сих пор в восторге, каждое фото как арт. Рекомендую всем!"</p><p class="client-name">— Дмитрий и Алина</p></div>
+      <div class="testimonial-card"><p class="testimonial-text">"Профессиональный подход и невероятно комфортная атмосфера. Получили потрясающие портреты для нашего бренда."</p><p class="client-name">— Виктория, продюсер</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- БЛОГ (статьи с наглядными фото) -->
+<section id="blog" class="section">
+  <div class="container">
+    <h2 class="section-title">Полезный блог</h2>
+    <div class="blog-grid">
+      <div class="blog-card"><img src="https://images.pexels.com/photos/4041383/pexels-photo-4041383.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Выбор локации"><h4>Как выбрать локацию для семейной съёмки</h4><p>Советы по стилю, свету и сезону. Делюсь лучшими местами в городе и за городом.</p></div>
+      <div class="blog-card"><img src="https://images.pexels.com/photos/2774559/pexels-photo-2774559.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Гардероб для фотосессии"><h4>Что надеть на фотосессию: гид по цветам</h4><p>Пастельные тона, текстуры и как не выглядеть пёстро. 5 правил идеального образа.</p></div>
+      <div class="blog-card"><img src="https://images.pexels.com/photos/2292837/pexels-photo-2292837.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Свадебный тайминг"><h4>Свадебный тайминг: как всё успеть</h4><p>Пример расписания съёмки, чтобы получить максимум эмоций без суеты.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- КОНТАКТЫ + ФОРМА ОБРАТНОЙ СВЯЗИ -->
+<section id="contact" class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">Свяжитесь со мной</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p><i class="fas fa-phone-alt"></i> +7 (912) 345-67-89</p>
+        <p><i class="fas fa-envelope"></i> hello@annasvetlova.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> г. Пенза, ул. Московская, 12, студия «Свет»</p>
+        <p><i class="fab fa-instagram"></i> @anna_photo_art &nbsp;| <i class="fab fa-vk"></i> vk.com/anna_photo &nbsp;| <i class="fab fa-telegram"></i> t.me/anna_photo</p>
+      </div>
+      <div class="contact-form">
+        <form id="callback-form">
+          <div class="form-group"><input type="text" placeholder="Ваше имя" required></div>
+          <div class="form-group"><input type="email" placeholder="E-mail" required></div>
+          <div class="form-group"><textarea rows="4" placeholder="Сообщение или дата съёмки..."></textarea></div>
+          <button type="submit">Отправить заявку</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer class="footer">
+  <div class="container">
+    <div>© 2026 Анна Светлова — Профессиональная фотография</div>
+    <div>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-vk"></i></a>
+      <a href="#"><i class="fab fa-telegram"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript для фильтрации портфолио и мобильного меню -->
+<script>
+  // фильтрация портфолио
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const portfolioItems = document.querySelectorAll('.portfolio-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      filterButtons.forEach(bt => bt.classList.remove('active'));
+      this.classList.add('active');
+      const filterValue = this.getAttribute('data-filter');
+      portfolioItems.forEach(item => {
+        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // мобильное меню
+  const mobileBtn = document.getElementById('mobile-menu');
+  const navLinks = document.getElementById('nav-links');
+  mobileBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+  // обработка формы обратной связи
+  const form = document.getElementById('callback-form');
+  if(form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Спасибо! Ваша заявка отправлена. Я свяжусь с вами в ближайшее время.');
+      form.reset();
+    });
+  }
+</script>
+</body>
+</html>
